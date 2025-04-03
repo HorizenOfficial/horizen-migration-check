@@ -38,7 +38,7 @@ export default async function doCheck() {
     var jsonData = jsonBig.parse(jsonFile);
     var tuples = Object.entries(jsonData).map(([key, value]) => [key, value.toString()]);  
     tuples.sort((a, b) => a[0].localeCompare(b[0]));
-    var hash = calculateHashEON(tuples);
+    var hash = calculateHash(tuples, true);
     console.log("Hash computed locally:", hash);
 
     var vaultEONContract = new web3.eth.Contract(ABI, process.env.EON_VAULT_CONTRACT);
@@ -56,7 +56,7 @@ export default async function doCheck() {
     jsonData = jsonBig.parse(jsonFile);
     var tuples = Object.entries(jsonData).map(([key, value]) => [key, value.toString()]);  
     tuples.sort((a, b) => a[0].localeCompare(b[0]));
-    var hash = calculateHashZEND(tuples);
+    var hash = calculateHash(tuples, false);
     console.log("Hash computed locally:", hash);
 
     var vaultEONContract = new web3.eth.Contract(ABI, process.env.ZEND_VAULT_CONTRACT);
@@ -73,32 +73,14 @@ export default async function doCheck() {
     return true;
 }
 
-function calculateHashEON(tuples){
+function calculateHash(tuples, isEON){
   var dumpRecursiveHash = "0x0000000000000000000000000000000000000000000000000000000000000000";
   for (const [key, value] of tuples) {
-    dumpRecursiveHash = updateCumulativeHashEON(dumpRecursiveHash, key, value);
+    const encoded = web3.eth.abi.encodeParameters(['bytes32', isEON ? 'address' : 'bytes20', 'uint256'],[dumpRecursiveHash, key, value])
+    dumpRecursiveHash = web3.utils.sha3(encoded, {encoding: 'hex'});
   }
   return dumpRecursiveHash;    
 }
 
-function updateCumulativeHashEON(previousHash, address, value){
-    //the following hashing algorithm produces the same output as the one used in solidity
-    const encoded = web3.eth.abi.encodeParameters(['bytes32', 'address', 'uint256'],[previousHash, address, value])
-    return web3.utils.sha3(encoded, {encoding: 'hex'})
-}
-
-function calculateHashZEND(tuples){
-  var dumpRecursiveHash = "0x0000000000000000000000000000000000000000000000000000000000000000";
-  for (const [key, value] of tuples) {
-    dumpRecursiveHash = updateCumulativeHashZEND(dumpRecursiveHash, key, value);
-  }
-  return dumpRecursiveHash;    
-}
-
-function updateCumulativeHashZEND(previousHash, address, value){
-  //the following hashing algorithm produces the same output as the one used in solidity
-  const encoded = web3.eth.abi.encodeParameters(['bytes32', 'bytes20', 'uint256'],[previousHash, address, value])
-  return web3.utils.sha3(encoded, {encoding: 'hex'})
-}
 
 
