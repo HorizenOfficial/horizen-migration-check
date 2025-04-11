@@ -45,7 +45,7 @@ export default async function doCheck() {
     var cumulativeHash = await vaultEONContract.methods._cumulativeHash().call();
     console.log('Hash from contract:', cumulativeHash);
     if(cumulativeHash != hash){
-      console.error("[ERROR] EON balances not confrming with hash published by: "+process.env.EON_VAULT_CONTRACT);
+      console.error("[ERROR] EON balances not conforming with hash published by: "+process.env.EON_VAULT_CONTRACT);
       return false;
     }else{
       console.log("\u2705 EON balances verified correctly");
@@ -59,8 +59,8 @@ export default async function doCheck() {
     var hash = calculateHash(tuples, false);
     console.log("Hash computed locally:", hash);
 
-    var vaultEONContract = new web3.eth.Contract(ABI, process.env.ZEND_VAULT_CONTRACT);
-    var cumulativeHash = await vaultEONContract.methods._cumulativeHash().call();
+    var vaultZENDContract = new web3.eth.Contract(ABI, process.env.ZEND_VAULT_CONTRACT);
+    var cumulativeHash = await vaultZENDContract.methods._cumulativeHash().call();
     console.log('Hash from contract:', cumulativeHash);
     if(cumulativeHash != hash){
       console.error("[ERROR] ZEND balances not conforming with hash published by: "+process.env.ZEND_VAULT_CONTRACT);

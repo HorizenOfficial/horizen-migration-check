@@ -11,10 +11,10 @@ Command line script to verify correctness of Horizen migration data.
 
 ### Instructions:
 
-- Download this project and install the dependencises with:
+- Download this project and install the dependencies with:
 
    ```
-   npm init
+   npm install
     ```
 
 - Rename .env.template file into .env and complete the nested properties.
@@ -26,7 +26,7 @@ Command line script to verify correctness of Horizen migration data.
    node index.js
     ```
 
-- Thre script will calculate locally a cumulative hash from the dumps, and compare it to the one stored onchain in the vault smart contracts.<br>
+- The script will calculate locally a cumulative hash from the dumps, and compare it to the one stored onchain in the vault smart contracts.<br>
 If everything goes well, you will obtain a log like this in the console:
 
    ```
