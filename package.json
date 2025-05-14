@@ -1,0 +1,31 @@
+{
+  "name": "horizen-migration-check",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Horizen Migration check script",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "mocha --exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HorizenOfficial/horizen-migration-check.git"
+  },
+  "author": "HorizenLabs",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HorizenOfficial/horizen-migration-check/issues"
+  },
+  "homepage": "https://github.com/HorizenOfficial/horizen-migration-check#readme",
+  "dependencies": {
+    "bs58check": "2.1.2",
+    "json-bigint": "^1.0.0",
+    "web3": "^4.16.0",
+    "dotenv": "^16.4.7"
+  },
+  "devDependencies": {
+    "chai": "^5.2.0",
+    "mocha": "^11.1.0"
+  }
+}
