@@ -5,7 +5,7 @@ Command line script to verify correctness of Horizen migration data.
 
 ### Prerequisites:
 
-- Execute a full dump of ZEND and EON following [these instructions](https://horizen-2-docs.horizen.io/migration/dump-execution)
+- Execute a full dump of ZEND and EON and produce the final json artifacts following [these instructions](https://horizen-2-docs.horizen.io/migration/dump-execution)
 - RPC connection to a BASE node, and addresses of the official EON and ZEND Vault contracts
 - NodeJS environment locally installed
 
